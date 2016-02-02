@@ -1,0 +1,50 @@
+Aim:
+	this script it designed to help remove those non-plant (E.coli, human, etc) sequences from a raw large EST assemblies. It uses the tabular format (BLAST NCBI NR protein database), and retrieves the taxonomy ID for the target sequences. And then report those potential contaminants.
+
+Repuirements:
+	Perl Modules:
+		Getopt::Long
+		Bio::LITE::Taxonomy::NCBI
+		Bio::LITE::Taxonomy::NCBI::Gi2taxid
+
+Prepare:
+	1. Download NCBI databases:
+		NCBI NR protein database:
+			ftp://ftp.ncbi.nlm.nih.gov/blast/db/
+	2. BLAST your ESTs against NR and output tabular format; 
+		blast	-m 8
+		blast++	-fmt 6
+		rapsearch
+				***Please note you may need a little more evidence to determine the taxonomy ID for each EST. That is, it's recommended to set the number of alignments/descriptions/Max_target_sequences to at least 3;
+	3. download dictionary file to transform NCBI seqID to taxonomy
+		gi_taxid: NCBI dictionary file to convert GI to TaxID
+			protein:
+					ftp://ftp.ncbi.nih.gov/pub/taxonomy/gi_taxid_prot.dmp.gz
+					OR ftp://ftp.ncbi.nih.gov/pub/taxonomy/gi_taxid_prot.zip
+			Nucleotide GI:
+					ftp://ftp.ncbi.nih.gov/pub/taxonomy/gi_taxid_nucl.dmp.gz
+					OR ftp://ftp.ncbi.nih.gov/pub/taxonomy/gi_taxid_nucl.zip
+		
+		nodesdmp: NCBI taxonomy nodes.dmp file
+					ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz
+					OR ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdmp.zip
+					
+		namesdmp: NCBI taxonomy names.dmp file
+					ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz
+					OR ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdmp.zip
+					
+Running:
+perl blast2taxonomy.pl --i Your.ESTs.against.NCBInr.Rapsearch1E-6.blast.m8 --min_alnlen 40 \
+	--gi_taxid $NCBI_Prot_Dict \
+	--nodesdmp $NCBI_Nodes \
+	--namesdmp $NCBI_Names \
+	--output blast2taxonomy.output \
+	--seqtogo Seq.To.Remove
+
+
+Author:
+	Fu-Hao Lu
+	Post-Doctoral Scientist in Micheal Bevan laboratory
+	Cell and Developmental Department, John Innes Centre
+	Norwich NR4 7UH, United Kingdom
+	E-mail: Fu-Hao.Lu@jic.ac.uk
