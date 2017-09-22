@@ -56,10 +56,10 @@ Options:
 		ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz
 		OR ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdmp.zip
 	--gi2taxid|-x <File>
-		2 column and tab delimited file. GI in 1st column, and taxid in 2nd;
+		[Opt] 2 column and tab delimited file. GI in 1st column, and taxid in 2nd;
 		For self-learning;
 	--species_tree|-s <File>
-		Species tree file; tab-delimited:
+		[Opt] Species tree file; tab-delimited:
 		spcies/Tab/genus/Tab/family/Tab/order/Tab/class/Tab/phylum/Tab/kingdom
 		For self-learning
 	--output/-o <FILE>
